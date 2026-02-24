@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MABB97 – Mal Adarsha Bidya Bhaban Memories</title>
+  <meta name="description" content="A heartfelt collection of memories from the friends of Mal Adarsha Bidya Bhaban. Relive the moments, laughter, and bonds that last a lifetime." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">MABB<span>97</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#memories">Memories</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+      <p class="hero-school">✦ Mal Adarsha Bidya Bhaban ✦</p>
+      <h1 class="hero-title">Friends Forever</h1>
+      <p class="hero-subtitle">A lifetime of memories, laughter, and bonds that never fade.</p>
+      <div class="hero-meta">
+        <span class="hero-badge">Class of MABB97</span>
+        <span class="hero-badge">76 Memories</span>
+      </div>
+      <a href="#gallery" class="hero-btn">Explore Memories ↓</a>
+    </div>
+    <div class="hero-scroll-hint">scroll down</div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="section-tag">Our Story</div>
+      <h2 class="section-title">Where It All Began</h2>
+      <p class="about-text">
+        These pages hold the memories of a group of friends whose journey began within the walls of
+        <strong>Mal Adarsha Bidya Bhaban</strong>. Through exams and lunchbreaks, festivals and farewells —
+        every moment shaped who we are today. This is our space to revisit those golden days and celebrate
+        the friendships that grew into something truly forever.
+      </p>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">76</div>
+          <div class="stat-label">Photos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Memories</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1</div>
+          <div class="stat-label">Family</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-tag">Photo Gallery</div>
+      <h2 class="section-title">Our Moments</h2>
+      <p class="section-sub">Every picture tells a story. Here are ours.</p>
+
+      <!-- Filter Buttons -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all" id="filter-all">All Photos</button>
+        <button class="filter-btn" data-filter="2020" id="filter-2020">2020</button>
+        <button class="filter-btn" data-filter="2021" id="filter-2021">2021</button>
+        <button class="filter-btn" data-filter="2022" id="filter-2022">2022</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Photos injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MEMORIES QUOTE ===== -->
+  <section class="memories-section" id="memories">
+    <div class="memories-bg"></div>
+    <div class="memories-overlay"></div>
+    <div class="container memories-inner">
+      <div class="quote-icon">"</div>
+      <blockquote class="memories-quote">
+        Friends are the family we choose for ourselves. And the ones from school —<br />
+        they knew us before we knew ourselves.
+      </blockquote>
+      <p class="memories-credit">— With love, MABB97</p>
+      <div class="memory-pills">
+        <span class="pill">🎒 School Days</span>
+        <span class="pill">🏫 Mal Adarsha Bidya Bhaban</span>
+        <span class="pill">📸 Captured Moments</span>
+        <span class="pill">❤️ Lifelong Bonds</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-logo">MABB<span>97</span></p>
+      <p class="footer-school">Mal Adarsha Bidya Bhaban</p>
+      <p class="footer-copy">Made with ❤️ for friends who are family · © 2024</p>
+    </div>
+  </footer>
+
+  <!-- ===== LIGHTBOX ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
+    <button class="lb-prev" id="lb-prev" aria-label="Previous">‹</button>
+    <button class="lb-next" id="lb-next" aria-label="Next">›</button>
+    <div class="lb-img-wrap">
+      <img src="" alt="Memory" class="lb-img" id="lb-img" />
+      <div class="lb-caption" id="lb-caption"></div>
+    </div>
+  </div>
+  <div class="lb-backdrop" id="lb-backdrop"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
