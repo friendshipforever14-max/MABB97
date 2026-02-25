@@ -318,80 +318,24 @@ observeRevealItems();
 // re-observe after gallery items are added
 setTimeout(observeRevealItems, 100);
 
-// ── Music Player ──────────────────────────────────────────────
+// ── Background Music (silent autoplay on first interaction) ───
 (function () {
   const audio = document.getElementById("bg-audio");
-  const btn = document.getElementById("music-btn");
-  const vinyl = document.getElementById("music-vinyl");
-  const playIc = document.getElementById("play-icon");
-  const pauseIc = document.getElementById("pause-icon");
-  const info = document.getElementById("music-info");
+  if (!audio) return;
 
-  if (!audio || !btn) return;
-
-  // Add animated sound-wave bars inside the button
-  const wave = document.createElement("div");
-  wave.className = "sound-wave";
-  wave.innerHTML = "<span></span><span></span><span></span><span></span><span></span>";
-  btn.appendChild(wave);
-
-  // Soft background volume
   audio.volume = 0.4;
+  let started = false;
 
-  let isPlaying = false;
-  let autoStarted = false;
-
-  function setPlayingState(playing) {
-    isPlaying = playing;
-    if (playing) {
-      playIc.style.display = "none";
-      pauseIc.style.display = "";
-      btn.classList.add("playing");
-      btn.classList.remove("hint-pulse");
-      vinyl.classList.add("spinning");
-      info.classList.add("visible");
-      // hide info label after 3s
-      setTimeout(() => info.classList.remove("visible"), 3000);
-    } else {
-      playIc.style.display = "";
-      pauseIc.style.display = "none";
-      btn.classList.remove("playing");
-      vinyl.classList.remove("spinning");
-      setTimeout(() => info.classList.remove("visible"), 1500);
-    }
+  function startMusic() {
+    if (started) return;
+    started = true;
+    audio.play().catch(() => { started = false; });
   }
 
-  // ── Autoplay on first user interaction ──────────────────────
-  function tryAutoPlay() {
-    if (autoStarted) return;
-    autoStarted = true;
-    audio.play().then(() => {
-      setPlayingState(true);
-    }).catch(() => {
-      autoStarted = false; // reset so next interaction can try again
-    });
-  }
-
+  // Trigger on any first user gesture
   ["click", "touchstart", "keydown", "scroll"].forEach(evt => {
-    document.addEventListener(evt, tryAutoPlay, { once: true, passive: true });
+    document.addEventListener(evt, startMusic, { once: true, passive: true });
   });
-
-  // ── Manual toggle on button click ────────────────────────────
-  btn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (isPlaying) {
-      audio.pause();
-      setPlayingState(false);
-    } else {
-      autoStarted = true;
-      audio.play().then(() => setPlayingState(true)).catch(() => { });
-    }
-  });
-
-  audio.addEventListener("pause", () => setPlayingState(false));
-  audio.addEventListener("play", () => setPlayingState(true));
-
-  // Subtle pulse hint so user knows the button is there
-  btn.classList.add("hint-pulse");
 })();
+
 
