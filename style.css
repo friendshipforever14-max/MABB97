@@ -867,3 +867,230 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ============================================================
+   MUSIC PLAYER (floating)
+   ============================================================ */
+.music-player {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-direction: row-reverse;
+}
+
+/* The circular button */
+.music-btn {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #1a120b, #2d1f0e);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    0 0 0 2px rgba(240, 192, 96, 0.35);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: box-shadow 0.4s ease, transform 0.3s ease;
+  overflow: hidden;
+}
+
+.music-btn:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 6px 30px rgba(0, 0, 0, 0.6),
+    0 0 0 3px rgba(240, 192, 96, 0.7),
+    0 0 20px rgba(240, 192, 96, 0.35);
+}
+
+/* Vinyl disc inside button */
+.music-vinyl {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at center,
+      #1a0a00 0%,
+      #2d1500 30%,
+      #1a0800 50%,
+      #3d2200 65%,
+      #1a0800 80%,
+      #0d0500 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+}
+
+.music-vinyl-inner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f0c060 0%, #b8860b 60%, #1a0a00 100%);
+  box-shadow: 0 0 6px rgba(240, 192, 96, 0.6);
+}
+
+/* Spinning animation when playing */
+.music-vinyl.spinning {
+  animation: spinVinyl 3s linear infinite;
+}
+
+@keyframes spinVinyl {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Play / pause SVG icons */
+.music-icon {
+  position: relative;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  color: var(--gold);
+  filter: drop-shadow(0 0 4px rgba(240, 192, 96, 0.6));
+  flex-shrink: 0;
+}
+
+/* Glowing ring when playing */
+.music-btn.playing {
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    0 0 0 3px var(--gold),
+    0 0 24px rgba(240, 192, 96, 0.5);
+  animation: pulseRing 2s ease-in-out infinite;
+}
+
+@keyframes pulseRing {
+
+  0%,
+  100% {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 0 3px var(--gold), 0 0 24px rgba(240, 192, 96, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 0 5px var(--gold), 0 0 40px rgba(240, 192, 96, 0.7);
+  }
+}
+
+/* Track info pill that slides in from the right */
+.music-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background: rgba(26, 18, 11, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(240, 192, 96, 0.3);
+  border-radius: 50px;
+  padding: 0.45rem 1.1rem;
+  margin-right: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  max-width: 0;
+  overflow: hidden;
+}
+
+.music-player:hover .music-info,
+.music-info.visible {
+  opacity: 1;
+  transform: translateX(0);
+  max-width: 300px;
+  pointer-events: auto;
+}
+
+.music-title {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.5px;
+}
+
+.music-sub {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.5px;
+}
+
+/* Sound wave bars (visible when playing) */
+.music-btn .sound-wave {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  gap: 2px;
+  z-index: 3;
+}
+
+.music-btn.playing .sound-wave {
+  display: flex;
+}
+
+.sound-wave span {
+  display: block;
+  width: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: wave 0.8s ease-in-out infinite alternate;
+}
+
+.sound-wave span:nth-child(1) {
+  height: 6px;
+  animation-delay: 0.0s;
+}
+
+.sound-wave span:nth-child(2) {
+  height: 10px;
+  animation-delay: 0.1s;
+}
+
+.sound-wave span:nth-child(3) {
+  height: 7px;
+  animation-delay: 0.2s;
+}
+
+.sound-wave span:nth-child(4) {
+  height: 10px;
+  animation-delay: 0.15s;
+}
+
+.sound-wave span:nth-child(5) {
+  height: 6px;
+  animation-delay: 0.05s;
+}
+
+@keyframes wave {
+  from {
+    transform: scaleY(0.4);
+  }
+
+  to {
+    transform: scaleY(1.2);
+  }
+}
+
+@media (max-width: 480px) {
+  .music-player {
+    bottom: 1.2rem;
+    right: 1.2rem;
+  }
+
+  .music-btn {
+    width: 50px;
+    height: 50px;
+  }
+}
